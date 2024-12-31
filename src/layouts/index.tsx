@@ -1,3 +1,4 @@
+import LogoIcon from "@/components/icons/Logo"
 import {
   CodepenOutlined,
   DashboardOutlined,
@@ -66,6 +67,7 @@ export default function Layout() {
     <div className="h-screen w-screen">
       <ProConfigProvider dark={true}>
         <ProLayout
+          logo={<LogoIcon />}
           location={{
             pathname: pathname == "/" ? "/dashboard" : pathname,
           }}
