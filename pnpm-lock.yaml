@@ -22,8 +22,11 @@ importers:
         version: 1.7.9
       umi:
         specifier: ^4.4.2
-        version: 4.4.2(@babel/core@7.26.0)(@types/node@22.10.2)(@types/react@18.3.18)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1)
+        version: 4.4.2(@babel/core@7.26.0)(@types/node@22.10.7)(@types/react@18.3.18)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1)
     devDependencies:
+      '@types/node':
+        specifier: ^22.10.7
+        version: 22.10.7
       '@types/react':
         specifier: ^18.0.33
         version: 18.3.18
@@ -1296,6 +1299,9 @@ packages:
 
   '@types/node@22.10.2':
     resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
+
+  '@types/node@22.10.7':
+    resolution: {integrity: sha512-V09KvXxFiutGp6B7XkpaDXlNadZxrzajcY50EuoLIpQ6WWYCSvf19lVIazzfIzQvhUN2HjX12spLojTnhuKlGg==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -6715,7 +6721,7 @@ snapshots:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.10.2
+      '@types/node': 22.10.7
       '@types/yargs': 16.0.9
       chalk: 4.1.2
 
@@ -6724,7 +6730,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.10.2
+      '@types/node': 22.10.7
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
@@ -7072,7 +7078,7 @@ snapshots:
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.7
 
   '@types/hapi__joi@17.1.9': {}
 
@@ -7113,6 +7119,10 @@ snapshots:
   '@types/minimist@1.2.5': {}
 
   '@types/node@22.10.2':
+    dependencies:
+      undici-types: 6.20.0
+
+  '@types/node@22.10.7':
     dependencies:
       undici-types: 6.20.0
 
@@ -7309,18 +7319,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@umijs/bundler-vite@4.4.2(@types/node@22.10.2)(lightningcss@1.22.1)(postcss@8.4.49)(rollup@3.29.5)(terser@5.37.0)':
+  '@umijs/bundler-vite@4.4.2(@types/node@22.10.7)(lightningcss@1.22.1)(postcss@8.4.49)(rollup@3.29.5)(terser@5.37.0)':
     dependencies:
       '@svgr/core': 6.5.1
       '@umijs/bundler-utils': 4.4.2
       '@umijs/utils': 4.4.2
-      '@vitejs/plugin-react': 4.0.0(vite@4.5.2(@types/node@22.10.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0))
+      '@vitejs/plugin-react': 4.0.0(vite@4.5.2(@types/node@22.10.7)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0))
       core-js: 3.34.0
       less: 4.1.3
       postcss-preset-env: 7.5.0(postcss@8.4.49)
       rollup-plugin-visualizer: 5.9.0(rollup@3.29.5)
       systemjs: 6.15.1
-      vite: 4.5.2(@types/node@22.10.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0)
+      vite: 4.5.2(@types/node@22.10.7)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0)
     transitivePeerDependencies:
       - '@types/node'
       - lightningcss
@@ -7555,7 +7565,7 @@ snapshots:
       - react-native
       - supports-color
 
-  '@umijs/preset-umi@4.4.2(@types/node@22.10.2)(@types/react@18.3.18)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1)':
+  '@umijs/preset-umi@4.4.2(@types/node@22.10.7)(@types/react@18.3.18)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1)':
     dependencies:
       '@iconify/utils': 2.1.1
       '@svgr/core': 6.5.1
@@ -7564,7 +7574,7 @@ snapshots:
       '@umijs/bundler-esbuild': 4.4.2
       '@umijs/bundler-mako': 0.10.0
       '@umijs/bundler-utils': 4.4.2
-      '@umijs/bundler-vite': 4.4.2(@types/node@22.10.2)(lightningcss@1.22.1)(postcss@8.4.49)(rollup@3.29.5)(terser@5.37.0)
+      '@umijs/bundler-vite': 4.4.2(@types/node@22.10.7)(lightningcss@1.22.1)(postcss@8.4.49)(rollup@3.29.5)(terser@5.37.0)
       '@umijs/bundler-webpack': 4.4.2(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1)
       '@umijs/core': 4.4.2
       '@umijs/did-you-know': 1.0.3
@@ -7687,13 +7697,13 @@ snapshots:
 
   '@ungap/structured-clone@1.2.1': {}
 
-  '@vitejs/plugin-react@4.0.0(vite@4.5.2(@types/node@22.10.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0))':
+  '@vitejs/plugin-react@4.0.0(vite@4.5.2(@types/node@22.10.7)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0))':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       react-refresh: 0.14.2
-      vite: 4.5.2(@types/node@22.10.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0)
+      vite: 4.5.2(@types/node@22.10.7)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -9922,7 +9932,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 22.10.2
+      '@types/node': 22.10.7
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -9939,7 +9949,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.10.2
+      '@types/node': 22.10.7
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -9953,14 +9963,14 @@ snapshots:
 
   jest-worker@29.4.3:
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.7
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.7
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -12287,14 +12297,14 @@ snapshots:
 
   typescript@5.7.2: {}
 
-  umi@4.4.2(@babel/core@7.26.0)(@types/node@22.10.2)(@types/react@18.3.18)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1):
+  umi@4.4.2(@babel/core@7.26.0)(@types/node@22.10.7)(@types/react@18.3.18)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1):
     dependencies:
       '@babel/runtime': 7.23.6
       '@umijs/bundler-utils': 4.4.2
       '@umijs/bundler-webpack': 4.4.2(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1)
       '@umijs/core': 4.4.2
       '@umijs/lint': 4.4.2(eslint@8.57.1)(stylelint@14.16.1)(typescript@5.7.2)
-      '@umijs/preset-umi': 4.4.2(@types/node@22.10.2)(@types/react@18.3.18)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1)
+      '@umijs/preset-umi': 4.4.2(@types/node@22.10.7)(@types/react@18.3.18)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.37.0)(type-fest@0.20.2)(typescript@5.7.2)(webpack@5.97.1)
       '@umijs/renderer-react': 4.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@umijs/server': 4.4.2
       '@umijs/test': 4.4.2(@babel/core@7.26.0)
@@ -12426,13 +12436,13 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@4.5.2(@types/node@22.10.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0):
+  vite@4.5.2(@types/node@22.10.7)(less@4.1.3)(lightningcss@1.22.1)(terser@5.37.0):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.4.49
       rollup: 3.29.5
     optionalDependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.7
       fsevents: 2.3.3
       less: 4.1.3
       lightningcss: 1.22.1

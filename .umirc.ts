@@ -4,11 +4,9 @@ export default defineConfig({
   routes: [
     { path: "/", component: "dashboard" },
     { path: "/dashboard", component: "dashboard" },
-    { path: "/settings", component: "settings" },
-    { path: "/models", component: "models" },
-    { path: "/workflow", component: "workflow" },
-    { path: "/resources", component: "resources" },
-    { path: "/chatbot", component: "chatbot" },
+    { path: "/collect", component: "collect" },
+    { path: "/process", component: "process" },
+    { path: "/analysis", component: "analysis" },
   ],
 
   proxy: {},

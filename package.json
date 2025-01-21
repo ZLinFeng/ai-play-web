@@ -16,6 +16,7 @@
     "umi": "^4.4.2"
   },
   "devDependencies": {
+    "@types/node": "^22.10.7",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "@umijs/plugins": "^4.4.2",

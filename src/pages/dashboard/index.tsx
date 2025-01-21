@@ -1,5 +1,7 @@
-import { Input } from "antd"
-
 export default () => {
-  return <Input />
+  return (
+    <div>
+      <span>Hello World</span>
+    </div>
+  )
 }
