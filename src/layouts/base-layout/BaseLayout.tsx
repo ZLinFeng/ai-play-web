@@ -1,8 +1,13 @@
 const BaseLayout = () => {
   return (
-    <div>
-      <h1>Layout</h1>
-    </div>
+    <>
+      <section className="h-full w-full bg-slate-600">
+        <div>
+          <h1>Base Layout</h1>
+        </div>
+        <header></header>
+      </section>
+    </>
   )
 }
 
