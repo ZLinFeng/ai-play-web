@@ -16,8 +16,9 @@ const options = [
 
 export default () => {
   return (
-    <div className="flex-col w-full">
-      <div className="pl-4 flex">
+    <div className="flex flex-col w-full gap-4">
+      {/* 查询条件栏 */}
+      <div className="flex">
         <div className="flex-grow">
           <Space size="middle">
             <Space.Compact>
@@ -45,7 +46,22 @@ export default () => {
           </Button>
         </div>
       </div>
-      <div className="flex justify-center"></div>
+      {/* 查询结果 */}
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-2 pl-4 pt-4">
+          <div className="h-[20px] w-[5px] bg-slate-900 rounded" />
+          <span className="text-sm font-bold">Keyword Collection</span>
+        </div>
+        <div className="flex flex-wrap gap-8">
+          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
+          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
+          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
+          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
+          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
+          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
+        </div>
+        <div></div>
+      </div>
     </div>
   )
 }

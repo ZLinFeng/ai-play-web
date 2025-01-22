@@ -116,7 +116,7 @@ const BaseSider: React.FC = () => {
         >
           <LogoIcon />
           {!context.menuCollapsed && (
-            <span className="text-white text-2xl pl-6">Berry Admin</span>
+            <span className="text-white text-2xl pl-2">Berry Admin</span>
           )}
         </div>
         <Menu

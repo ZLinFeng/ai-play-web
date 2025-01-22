@@ -13,7 +13,7 @@ const BaseLayout = () => {
         <BaseSider />
         <div className="flex flex-col flex-grow">
           <BaseHeader />
-          <div className="flex-grow pt-4">
+          <div className="flex-grow overflow-y-auto p-4">
             <Outlet />
           </div>
         </div>

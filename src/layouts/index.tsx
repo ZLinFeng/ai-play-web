@@ -21,6 +21,11 @@ export default function Layout() {
           components: {
             Menu: {
               collapsedWidth: 50,
+              darkPopupBg: "#0f172a",
+              darkSubMenuItemBg: "#0f172a",
+            },
+            Button: {
+              primaryShadow: "",
             },
           },
         }}
