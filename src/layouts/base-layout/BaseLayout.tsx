@@ -1,11 +1,22 @@
+import { useContext } from "react"
+import { Outlet } from "umi"
+import { RuntimeContext } from "../context"
+import BaseHeader from "./BaseHeader"
+import BaseSider from "./BaseSider"
+
 const BaseLayout = () => {
+  const context = useContext(RuntimeContext)
+
   return (
     <>
-      <section className="h-full w-full bg-slate-600">
-        <div>
-          <h1>Base Layout</h1>
+      <section className="h-screen w-screen flex">
+        <BaseSider />
+        <div className="flex flex-col flex-grow">
+          <BaseHeader />
+          <div className="flex-grow pt-4">
+            <Outlet />
+          </div>
         </div>
-        <header></header>
       </section>
     </>
   )

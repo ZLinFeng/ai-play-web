@@ -4,7 +4,7 @@ export default defineConfig({
   routes: [
     { path: "/", component: "dashboard" },
     { path: "/dashboard", component: "dashboard" },
-    { path: "/collect", component: "collect" },
+    { path: "/collection", component: "collection" },
     { path: "/process", component: "process" },
     { path: "/analysis", component: "analysis" },
   ],
