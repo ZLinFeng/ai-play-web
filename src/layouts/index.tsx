@@ -27,6 +27,12 @@ export default function Layout() {
             Button: {
               primaryShadow: "",
             },
+            Table: {
+              headerBg: "#0f172a",
+              headerColor: "#fff",
+              headerBorderRadius: 0,
+              cellPaddingBlockMD: 10,
+            },
           },
         }}
       >

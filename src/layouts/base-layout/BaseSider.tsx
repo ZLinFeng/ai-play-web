@@ -107,7 +107,7 @@ const BaseSider: React.FC = () => {
       <aside
         className={`bg-slate-900 h-full flex flex-col items-center ${
           context.menuCollapsed ? "w-[50px]" : "w-[240px]"
-        }`}
+        } ${context.menuCollapsed ? "min-w-[50px]" : "min-w-[240px]"}`}
       >
         <div
           className={`mt-4 flex w-full items-center ${

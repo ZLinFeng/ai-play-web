@@ -1,5 +1,7 @@
+import CollectionTable from "@/components/table/CollectionTable"
 import { PlusCircleOutlined } from "@ant-design/icons"
 import { Button, DatePicker, Input, Select, Space } from "antd"
+import { useEffect, useRef, useState } from "react"
 
 const { RangePicker } = DatePicker
 
@@ -15,10 +17,20 @@ const options = [
 ]
 
 export default () => {
+  const parentRef = useRef<HTMLDivElement | null>(null)
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    if (parentRef.current) {
+      // 获取父节点的宽度
+      setWidth(parentRef.current.offsetWidth)
+    }
+  }, [])
+
   return (
-    <div className="flex flex-col w-full gap-4">
+    <div className="flex flex-col w-full gap-4" ref={parentRef}>
       {/* 查询条件栏 */}
-      <div className="flex">
+      <div className="flex w-full">
         <div className="flex-grow">
           <Space size="middle">
             <Space.Compact>
@@ -47,20 +59,8 @@ export default () => {
         </div>
       </div>
       {/* 查询结果 */}
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2 pl-4 pt-4">
-          <div className="h-[20px] w-[5px] bg-slate-900 rounded" />
-          <span className="text-sm font-bold">Keyword Collection</span>
-        </div>
-        <div className="flex flex-wrap gap-8">
-          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
-          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
-          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
-          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
-          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
-          <div className="w-[200px] h-[80px] border border-slate-900 rounded-md"></div>
-        </div>
-        <div></div>
+      <div className="pt-4 flex justify-center]" style={{ width: width }}>
+        <CollectionTable />
       </div>
     </div>
   )

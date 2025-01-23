@@ -12,6 +12,7 @@
     "@ant-design/icons": "^5.5.2",
     "@ant-design/pro-components": "^2.8.2",
     "antd": "^5.22.7",
+    "antd-style": "^3.7.1",
     "axios": "^1.7.9",
     "umi": "^4.4.2"
   },
