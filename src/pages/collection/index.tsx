@@ -1,7 +1,6 @@
 import CollectionTable from "@/components/table/CollectionTable"
 import { PlusCircleOutlined } from "@ant-design/icons"
 import { Button, DatePicker, Input, Select, Space } from "antd"
-import { useEffect, useRef, useState } from "react"
 
 const { RangePicker } = DatePicker
 
@@ -17,18 +16,8 @@ const options = [
 ]
 
 export default () => {
-  const parentRef = useRef<HTMLDivElement | null>(null)
-  const [width, setWidth] = useState(0)
-
-  useEffect(() => {
-    if (parentRef.current) {
-      // 获取父节点的宽度
-      setWidth(parentRef.current.offsetWidth)
-    }
-  }, [])
-
   return (
-    <div className="flex flex-col w-full gap-4" ref={parentRef}>
+    <div className="flex flex-col w-full gap-4">
       {/* 查询条件栏 */}
       <div className="flex w-full">
         <div className="flex-grow">
@@ -59,7 +48,7 @@ export default () => {
         </div>
       </div>
       {/* 查询结果 */}
-      <div className="pt-4 flex justify-center]" style={{ width: width }}>
+      <div className="pt-4 flex justify-center]">
         <CollectionTable />
       </div>
     </div>

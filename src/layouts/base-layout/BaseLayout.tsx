@@ -5,29 +5,26 @@ import BaseHeader from "./BaseHeader"
 import BaseSider from "./BaseSider"
 
 const BaseLayout = () => {
-  const context = useContext(RuntimeContext)
-
+  const { menuCollapsed } = useContext(RuntimeContext)
   const ref = useRef<HTMLDivElement>(null)
 
   const [bodyWidth, setBodyWidth] = useState(0)
 
   useEffect(() => {
-    const handleResize = () => {
-      if (ref.current) {
-        setBodyWidth(ref.current.clientWidth)
-      }
+    console.log("menuCollapsed:", menuCollapsed)
+    if (ref.current) {
+      console.log("ref.current.offsetWidth:", ref.current.offsetWidth)
+      setBodyWidth(ref.current.offsetWidth)
     }
-
-    handleResize()
-  }, [])
+  }, [menuCollapsed])
 
   return (
     <>
       <section className="h-screen w-screen flex">
         <BaseSider />
-        <div className="flex flex-col flex-grow" ref={ref}>
+        <div className="flex flex-col" ref={ref}>
           <BaseHeader />
-          <div className="flex-grow p-4 w-full">
+          <div className="flex-grow p-4">
             <Outlet />
           </div>
         </div>

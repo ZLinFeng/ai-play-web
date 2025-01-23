@@ -150,7 +150,7 @@ const data: DataType[] = [
 
 const CollectionTable: React.FC = () => {
   return (
-    <div className="w-full flex justify-center m-4">
+    <div className="w-full flex justify-center">
       <Table<DataType>
         pagination={{
           position: ["bottomRight"],
