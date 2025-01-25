@@ -44,8 +44,8 @@ const items: MenuItem[] = [
     label: "Analysis",
     icon: <SignalFilled />,
     children: [
-      { key: "6", label: "Graph" },
-      { key: "7", label: "Table" },
+      { key: "6", label: "Statistics" },
+      { key: "7", label: "Graph" },
     ],
   },
   {
@@ -107,7 +107,9 @@ const BaseSider: React.FC = () => {
       <aside
         className={`bg-slate-900 h-full flex flex-col items-center ${
           context.menuCollapsed ? "w-[50px]" : "w-[240px]"
-        } ${context.menuCollapsed ? "min-w-[50px]" : "min-w-[240px]"}`}
+        } ${
+          context.menuCollapsed ? "min-w-[50px]" : "min-w-[240px]"
+        } transition-width duration-200`}
       >
         <div
           className={`mt-4 flex w-full items-center ${
@@ -122,7 +124,7 @@ const BaseSider: React.FC = () => {
         <Menu
           className="pt-4 flex-grow"
           selectedKeys={selectedKeys}
-          defaultOpenKeys={["sub1", "sub2", "sub3"]}
+          //defaultOpenKeys={["sub1", "sub2", "sub3"]}
           mode="inline"
           theme="dark"
           inlineCollapsed={context.menuCollapsed}

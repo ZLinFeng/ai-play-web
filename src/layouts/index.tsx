@@ -17,6 +17,7 @@ export default function Layout() {
           token: {
             colorPrimary: "#0f172a",
             fontFamily: "Open Sans",
+            controlItemBgActive: "#fafafa",
           },
           components: {
             Menu: {
@@ -32,6 +33,8 @@ export default function Layout() {
               headerColor: "#fff",
               headerBorderRadius: 0,
               cellPaddingBlockMD: 10,
+              rowSelectedBg: "#fafafa",
+              rowSelectedHoverBg: "fafafa",
             },
           },
         }}

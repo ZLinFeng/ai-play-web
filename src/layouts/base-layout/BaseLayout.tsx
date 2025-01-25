@@ -10,21 +10,35 @@ const BaseLayout = () => {
 
   const [bodyWidth, setBodyWidth] = useState(0)
 
-  useEffect(() => {
-    console.log("menuCollapsed:", menuCollapsed)
-    if (ref.current) {
-      console.log("ref.current.offsetWidth:", ref.current.offsetWidth)
-      setBodyWidth(ref.current.offsetWidth)
+  const computedContentWidth = (
+    collapsed: boolean,
+    windowWidth: number,
+  ): number => {
+    if (collapsed) {
+      return windowWidth - 50
+    } else {
+      return windowWidth - 240
     }
+  }
+
+  window.addEventListener("resize", () => {
+    setBodyWidth(computedContentWidth(menuCollapsed, ref.current?.clientWidth!))
+  })
+
+  useEffect(() => {
+    setBodyWidth(computedContentWidth(menuCollapsed, ref.current?.clientWidth!))
   }, [menuCollapsed])
 
   return (
     <>
-      <section className="h-screen w-screen flex">
+      <section className="h-screen w-screen flex" ref={ref}>
         <BaseSider />
-        <div className="flex flex-col" ref={ref}>
+        <div
+          className="flex flex-col flex-1 min-w-[800px]"
+          style={{ width: bodyWidth }}
+        >
           <BaseHeader />
-          <div className="flex-grow p-4">
+          <div className="flex-1 p-4">
             <Outlet />
           </div>
         </div>

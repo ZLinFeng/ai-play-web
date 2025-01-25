@@ -1,8 +1,11 @@
 import type { TableProps } from "antd"
-import { Space, Table } from "antd"
+import { Button, Space, Table } from "antd"
+import React, { useState } from "react"
 import "./table.css"
 
 type ColumnsType<T extends object> = TableProps<T>["columns"]
+type TableRowSelection<T extends object = object> =
+  TableProps<T>["rowSelection"]
 
 interface DataType {
   key: string
@@ -16,6 +19,10 @@ interface DataType {
   status: string
   frequency: string
   tags: string[]
+}
+
+interface CollectionTableProps {
+  onSelectionChange: (value: boolean) => void
 }
 
 const columns: ColumnsType<DataType> = [
@@ -40,25 +47,13 @@ const columns: ColumnsType<DataType> = [
     width: 200,
   },
   {
-    title: "Create Time",
-    dataIndex: "collectionName",
-    key: "createTime",
-    width: 200,
-  },
-  {
-    title: "Update Time",
-    dataIndex: "collectionName",
-    key: "updateTime",
-    width: 200,
-  },
-  {
-    title: "Start Time",
+    title: "Collection Start Time",
     dataIndex: "collectionName",
     key: "startTime",
     width: 200,
   },
   {
-    title: "End Time",
+    title: "Collection End Time",
     dataIndex: "collectionName",
     key: "endTime",
     width: 200,
@@ -76,21 +71,15 @@ const columns: ColumnsType<DataType> = [
     width: 200,
   },
   {
-    title: "Frequency",
+    title: "Create Time",
     dataIndex: "collectionName",
-    key: "2",
+    key: "createTime",
     width: 200,
   },
   {
-    title: "Frequency",
+    title: "Update Time",
     dataIndex: "collectionName",
-    key: "3",
-    width: 200,
-  },
-  {
-    title: "Frequency",
-    dataIndex: "collectionName",
-    key: "4",
+    key: "updateTime",
     width: 200,
   },
   {
@@ -100,7 +89,16 @@ const columns: ColumnsType<DataType> = [
     width: 200,
     render: (_, record) => (
       <Space size="middle">
-        <a>Delete</a>
+        <Button color="magenta" variant="outlined">
+          Details
+        </Button>
+        <Button color="blue" variant="outlined">
+          Edit
+        </Button>
+        <Button color="purple" variant="outlined">
+          Analysis
+        </Button>
+        <Button danger>Delete</Button>
       </Space>
     ),
   },
@@ -148,7 +146,22 @@ const data: DataType[] = [
   },
 ]
 
-const CollectionTable: React.FC = () => {
+const CollectionTable: React.FC<CollectionTableProps> = ({
+  onSelectionChange,
+}) => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log("selectedRowKeys changed: ", newSelectedRowKeys)
+    setSelectedRowKeys(newSelectedRowKeys)
+    onSelectionChange(newSelectedRowKeys.length > 0)
+  }
+
+  const rowSelection: TableRowSelection<DataType> = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  }
+
   return (
     <div className="w-full flex justify-center">
       <Table<DataType>
@@ -162,7 +175,7 @@ const CollectionTable: React.FC = () => {
         dataSource={data}
         scroll={{ x: "max-content" }}
         className={`collection-table w-full min-w-full`}
-        bordered
+        rowSelection={rowSelection}
       />
     </div>
   )

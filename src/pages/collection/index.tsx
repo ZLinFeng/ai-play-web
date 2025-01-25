@@ -1,6 +1,11 @@
 import CollectionTable from "@/components/table/CollectionTable"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import {
+  DeleteFilled,
+  PlusCircleOutlined,
+  SignalFilled,
+} from "@ant-design/icons"
 import { Button, DatePicker, Input, Select, Space } from "antd"
+import { useState } from "react"
 
 const { RangePicker } = DatePicker
 
@@ -16,6 +21,7 @@ const options = [
 ]
 
 export default () => {
+  const [selected, setSelected] = useState(false)
   return (
     <div className="flex flex-col w-full gap-4">
       {/* 查询条件栏 */}
@@ -41,7 +47,23 @@ export default () => {
             </Space.Compact>
           </Space>
         </div>
-        <div className="pr-4">
+        <div className="flex gap-4">
+          <Button
+            color="purple"
+            variant="solid"
+            disabled={!selected}
+            icon={<SignalFilled />}
+          >
+            Bulk Analysis
+          </Button>
+          <Button
+            color="red"
+            variant="solid"
+            disabled={!selected}
+            icon={<DeleteFilled />}
+          >
+            Bulk Delete
+          </Button>
           <Button type="primary" icon={<PlusCircleOutlined />}>
             Add
           </Button>
@@ -49,7 +71,7 @@ export default () => {
       </div>
       {/* 查询结果 */}
       <div className="pt-4 flex justify-center]">
-        <CollectionTable />
+        <CollectionTable onSelectionChange={setSelected} />
       </div>
     </div>
   )
