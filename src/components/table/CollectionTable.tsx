@@ -11,14 +11,15 @@ interface DataType {
   key: string
   collectionName: string
   collectionType: number
-  source: string
+  sources: string[]
+  collectionStartTime: string
+  collectionEndTime: string
+  latestCollectionTime: string
+  latestScheduleTime: string
   createTime: string
   updateTime: string
-  startTime: string
-  endTime: string
   status: string
   frequency: string
-  tags: string[]
 }
 
 interface CollectionTableProps {
@@ -41,44 +42,44 @@ const columns: ColumnsType<DataType> = [
     width: 200,
   },
   {
-    title: "Source",
-    dataIndex: "collectionName",
+    title: "Sources",
+    dataIndex: "sources",
     key: "source",
     width: 200,
   },
   {
     title: "Collection Start Time",
-    dataIndex: "collectionName",
-    key: "startTime",
+    dataIndex: "collectionStartTime",
+    key: "collectionStartTime",
     width: 200,
   },
   {
     title: "Collection End Time",
-    dataIndex: "collectionName",
-    key: "endTime",
+    dataIndex: "collectionEndTime",
+    key: "collectionEndTime",
     width: 200,
   },
   {
     title: "Status",
-    dataIndex: "collectionName",
+    dataIndex: "status",
     key: "status",
     width: 200,
   },
   {
     title: "Frequency",
-    dataIndex: "collectionName",
-    key: "1",
+    dataIndex: "frequency",
+    key: "frequency",
     width: 200,
   },
   {
     title: "Create Time",
-    dataIndex: "collectionName",
+    dataIndex: "createTime",
     key: "createTime",
     width: 200,
   },
   {
     title: "Update Time",
-    dataIndex: "collectionName",
+    dataIndex: "updateTime",
     key: "updateTime",
     width: 200,
   },
@@ -89,60 +90,20 @@ const columns: ColumnsType<DataType> = [
     width: 200,
     render: (_, record) => (
       <Space size="middle">
-        <Button color="magenta" variant="outlined">
+        <Button color="magenta" variant="outlined" size="small">
           Details
         </Button>
-        <Button color="blue" variant="outlined">
+        <Button color="blue" variant="outlined" size="small">
           Edit
         </Button>
-        <Button color="purple" variant="outlined">
+        <Button color="purple" variant="outlined" size="small">
           Analysis
         </Button>
-        <Button danger>Delete</Button>
+        <Button danger size="small">
+          Delete
+        </Button>
       </Space>
     ),
-  },
-]
-
-const data: DataType[] = [
-  {
-    key: "1",
-    collectionName: "John Brown",
-    collectionType: 32,
-    source: "New York No. 1",
-    tags: ["nice", "developer"],
-    createTime: "",
-    updateTime: "",
-    startTime: "",
-    endTime: "",
-    status: "",
-    frequency: "",
-  },
-  {
-    key: "2",
-    collectionName: "Jim Green",
-    collectionType: 42,
-    source: "London No. 1",
-    tags: ["loser"],
-    createTime: "",
-    updateTime: "",
-    startTime: "",
-    endTime: "",
-    status: "",
-    frequency: "",
-  },
-  {
-    key: "3",
-    collectionName: "Joe Black",
-    collectionType: 32,
-    source: "Sydney No. 1",
-    tags: ["cool", "teacher"],
-    createTime: "",
-    updateTime: "",
-    startTime: "",
-    endTime: "",
-    status: "",
-    frequency: "",
   },
 ]
 
@@ -150,9 +111,9 @@ const CollectionTable: React.FC<CollectionTableProps> = ({
   onSelectionChange,
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+  const [data, setData] = useState<DataType[]>([])
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", newSelectedRowKeys)
     setSelectedRowKeys(newSelectedRowKeys)
     onSelectionChange(newSelectedRowKeys.length > 0)
   }

@@ -4,6 +4,7 @@ import {
   BugFilled,
   ControlFilled,
   DashboardFilled,
+  DatabaseOutlined,
   SignalFilled,
 } from "@ant-design/icons"
 import { Menu, MenuProps } from "antd"
@@ -14,11 +15,25 @@ import { RuntimeContext } from "../context"
 type MenuItem = Required<MenuProps>["items"][number]
 
 const items: MenuItem[] = [
-  { key: "1", icon: <DashboardFilled />, label: "Dashboard" },
+  {
+    key: "1",
+    icon: <DashboardFilled />,
+    label: <Link to={"/dashboard"}>Dashboard</Link>,
+  },
   {
     key: "2",
     icon: <BugFilled />,
-    label: <Link to={"/collection"}>Collection</Link>,
+    label: "Collection",
+    children: [
+      {
+        key: "3",
+        label: <Link to={"/tasks"}>Tasks</Link>,
+      },
+      {
+        key: "4",
+        label: "Collection Logs",
+      },
+    ],
   },
   {
     key: "sub1",
@@ -26,16 +41,20 @@ const items: MenuItem[] = [
     label: "Processing",
     children: [
       {
-        key: "3",
-        label: "Model",
+        key: "5",
+        label: "Models",
       },
       {
-        key: "4",
+        key: "6",
         label: "Workflow",
       },
       {
-        key: "5",
-        label: "Task",
+        key: "7",
+        label: "Jobs",
+      },
+      {
+        key: "8",
+        label: "Processing Logs",
       },
     ],
   },
@@ -44,17 +63,29 @@ const items: MenuItem[] = [
     label: "Analysis",
     icon: <SignalFilled />,
     children: [
-      { key: "6", label: "Statistics" },
-      { key: "7", label: "Graph" },
+      { key: "9", label: "Cases" },
+      { key: "10", label: "Statistics" },
+      { key: "11", label: "Graph" },
     ],
   },
   {
     key: "sub3",
+    label: "Resource",
+    icon: <DatabaseOutlined />,
+    children: [
+      { key: "12", label: "Information Table" },
+      { key: "13", label: "Knowledge Graph" },
+      { key: "17", label: "Digital Profile" },
+    ],
+  },
+  {
+    key: "sub4",
     label: "Management",
     icon: <AppstoreFilled />,
     children: [
-      { key: "8", label: "Host" },
-      { key: "9", label: "Component" },
+      { key: "14", label: "Hosts" },
+      { key: "15", label: "Components" },
+      { key: "16", label: "Authorization" },
     ],
   },
 ]
@@ -66,35 +97,39 @@ const BaseSider: React.FC = () => {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
 
   useEffect(() => {
-    console.log("location: ", location.pathname)
     switch (location.pathname) {
       case "/":
         setSelectedKeys(["1"])
         break
-      case "/collection":
-        console.log("2")
-        setSelectedKeys(["2"])
+      case "/dashboard":
+        setSelectedKeys(["1"])
         break
-      case "/model":
+      case "/tasks":
         setSelectedKeys(["3"])
         break
-      case "/workflow":
+      case "/history":
         setSelectedKeys(["4"])
         break
-      case "/task":
+      case "/model":
         setSelectedKeys(["5"])
         break
-      case "/graph":
+      case "/workflow":
         setSelectedKeys(["6"])
         break
-      case "/table":
+      case "/task":
         setSelectedKeys(["7"])
         break
-      case "/host":
+      case "/graph":
         setSelectedKeys(["8"])
         break
-      case "/component":
+      case "/table":
         setSelectedKeys(["9"])
+        break
+      case "/host":
+        setSelectedKeys(["10"])
+        break
+      case "/component":
+        setSelectedKeys(["11"])
         break
       default:
         setSelectedKeys([])
@@ -124,9 +159,9 @@ const BaseSider: React.FC = () => {
         <Menu
           className="pt-4 flex-grow"
           selectedKeys={selectedKeys}
-          //defaultOpenKeys={["sub1", "sub2", "sub3"]}
+          defaultOpenKeys={["sub1", "sub2", "sub3"]}
           mode="inline"
-          theme="dark"
+          //theme="dark"
           inlineCollapsed={context.menuCollapsed}
           items={items}
         />
