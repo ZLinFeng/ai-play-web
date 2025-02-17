@@ -156,15 +156,23 @@ const BaseSider: React.FC = () => {
             <span className="text-white text-2xl pl-2">Berry Admin</span>
           )}
         </div>
-        <Menu
-          className="pt-4 flex-grow"
-          selectedKeys={selectedKeys}
-          defaultOpenKeys={["sub1", "sub2", "sub3"]}
-          mode="inline"
-          //theme="dark"
-          inlineCollapsed={context.menuCollapsed}
-          items={items}
-        />
+        <div
+          className="flex-1 w-full overflow-y-auto"
+          style={{
+            scrollbarWidth: "none", // Firefox
+            msOverflowStyle: "none", // IE
+          }}
+        >
+          <Menu
+            className="pt-4 flex-grow"
+            selectedKeys={selectedKeys}
+            defaultOpenKeys={["sub1", "sub2", "sub3"]}
+            mode="inline"
+            //theme="dark"
+            inlineCollapsed={context.menuCollapsed}
+            items={items}
+          />
+        </div>
       </aside>
     </>
   )
