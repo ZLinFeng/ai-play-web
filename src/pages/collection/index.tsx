@@ -4,7 +4,7 @@ import {
   PlusCircleOutlined,
   SignalFilled,
 } from "@ant-design/icons"
-import { Button, DatePicker, Input, Select, Space } from "antd"
+import { Button, DatePicker, Pagination } from "antd"
 import { useState } from "react"
 
 const { RangePicker } = DatePicker
@@ -26,27 +26,6 @@ export default () => {
     <div className="flex flex-col w-full gap-4">
       {/* 查询条件栏 */}
       <div className="flex w-full">
-        <div className="flex-grow">
-          <Space size="middle">
-            <Space.Compact>
-              <Select
-                defaultValue="Keyword"
-                options={options}
-                className="w-[200px]"
-              />
-              <Input placeholder="Collection Name" />
-            </Space.Compact>
-            <Space.Compact>
-              <RangePicker />
-            </Space.Compact>
-            <Space.Compact>
-              <Button type="primary">Search</Button>
-            </Space.Compact>
-            <Space.Compact>
-              <Button>Reset</Button>
-            </Space.Compact>
-          </Space>
-        </div>
         <div className="flex gap-4">
           <Button
             color="purple"
@@ -70,8 +49,11 @@ export default () => {
         </div>
       </div>
       {/* 查询结果 */}
-      <div className="pt-4 flex justify-center]">
+      <div className="flex justify-center flex-col gap-4">
         <CollectionTable onSelectionChange={setSelected} />
+        <div className="flex justify-end">
+          <Pagination total={85} defaultPageSize={20} defaultCurrent={1} />
+        </div>
       </div>
     </div>
   )

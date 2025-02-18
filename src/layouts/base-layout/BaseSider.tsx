@@ -21,7 +21,7 @@ const items: MenuItem[] = [
     label: <Link to={"/dashboard"}>Dashboard</Link>,
   },
   {
-    key: "2",
+    key: "sub0",
     icon: <BugFilled />,
     label: "Collection",
     children: [
@@ -31,7 +31,7 @@ const items: MenuItem[] = [
       },
       {
         key: "4",
-        label: "Collection Logs",
+        label: <Link to={"/collection-logs"}>Task Logs</Link>,
       },
     ],
   },
@@ -54,7 +54,7 @@ const items: MenuItem[] = [
       },
       {
         key: "8",
-        label: "Processing Logs",
+        label: "Job Logs",
       },
     ],
   },
@@ -107,7 +107,7 @@ const BaseSider: React.FC = () => {
       case "/tasks":
         setSelectedKeys(["3"])
         break
-      case "/history":
+      case "/collection-logs":
         setSelectedKeys(["4"])
         break
       case "/model":
@@ -166,7 +166,7 @@ const BaseSider: React.FC = () => {
           <Menu
             className="pt-4 flex-grow"
             selectedKeys={selectedKeys}
-            defaultOpenKeys={["sub1", "sub2", "sub3"]}
+            defaultOpenKeys={["sub0", "sub1", "sub2", "sub3", "sub4"]}
             mode="inline"
             //theme="dark"
             inlineCollapsed={context.menuCollapsed}

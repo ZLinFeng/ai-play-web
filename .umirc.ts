@@ -5,6 +5,7 @@ export default defineConfig({
     { path: "/", component: "dashboard" },
     { path: "/dashboard", component: "dashboard" },
     { path: "/tasks", component: "collection" },
+    { path: "/collection-logs", component: "collectionLogs" },
     { path: "/process", component: "process" },
     { path: "/analysis", component: "analysis" },
   ],
