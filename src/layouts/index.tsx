@@ -45,6 +45,10 @@ export default function Layout() {
               rowSelectedBg: "#fafafa",
               rowSelectedHoverBg: "fafafa",
             },
+            Select: {
+              optionActiveBg: "#f0f0f0",
+              optionSelectedBg: "#f0f0f0",
+            },
           },
         }}
       >

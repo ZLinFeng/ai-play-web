@@ -12,9 +12,10 @@ export namespace Collection {
     taskName: string
     taskType: number
     sources: number[]
+    keywords: string[]
     startTime: number
     endTime: number
-    status: number
+    status?: number
     frequency?: string
   }
 }

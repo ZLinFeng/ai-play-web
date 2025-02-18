@@ -1,3 +1,4 @@
+import { addTask } from "@/api/collection"
 import FacebookIcon from "@/components/icons/facebook"
 import InstagramIcon from "@/components/icons/instagram"
 import TiktokIcon from "@/components/icons/tiktok"
@@ -21,6 +22,8 @@ import {
   Pagination,
   Select,
   Space,
+  Spin,
+  Tooltip,
 } from "antd"
 import { useState } from "react"
 
@@ -38,11 +41,51 @@ export default () => {
 
   // 多选框的值
   const SOURCE_OPTIONS = [
-    { title: "Facebook", value: 1, label: <FacebookIcon /> },
-    { title: "X (Twitter)", value: 2, label: <TwitterIcon /> },
-    { title: "Tiktok", value: 3, label: <TiktokIcon /> },
-    { title: "Instagram", value: 4, label: <InstagramIcon /> },
-    { title: "Youtube", value: 5, label: <YoutubeIcon /> },
+    {
+      title: "Facebook",
+      value: 1,
+      label: (
+        <Tooltip placement="top" title="Facebook">
+          <FacebookIcon />
+        </Tooltip>
+      ),
+    },
+    {
+      title: "X (Twitter)",
+      value: 2,
+      label: (
+        <Tooltip placement="top" title="X (Twitter)">
+          <TwitterIcon />
+        </Tooltip>
+      ),
+    },
+    {
+      title: "Tiktok",
+      value: 3,
+      label: (
+        <Tooltip placement="top" title="Tiktok">
+          <TiktokIcon />
+        </Tooltip>
+      ),
+    },
+    {
+      title: "Instagram",
+      value: 4,
+      label: (
+        <Tooltip placement="top" title="Instagram">
+          <InstagramIcon />
+        </Tooltip>
+      ),
+    },
+    {
+      title: "Youtube",
+      value: 5,
+      label: (
+        <Tooltip placement="top" title="Youtube">
+          <YoutubeIcon />
+        </Tooltip>
+      ),
+    },
   ]
   const [isCheckAll, setIsCheckAll] = useState(false)
   const [isIndeterminate, setIsIndeterminate] = useState(false)
@@ -72,9 +115,30 @@ export default () => {
     form.setFieldsValue({ sources: values })
   }
 
-  const addTask = () => {
+  const addTaskBtn = () => {
     setOpen(true)
     setDrawerTitle("Add Collection Task")
+  }
+
+  // 取消
+  const cancle = () => {
+    form.resetFields()
+    setOpen(false)
+  }
+
+  // 提交
+  const submit = () => {
+    console.log(form.getFieldsValue())
+    console.log(checkedList)
+    const { name, taskType, keywords, collectionRange } = form.getFieldsValue()
+    addTask({
+      taskName: name,
+      taskType: taskType,
+      keywords: keywords,
+      sources: checkedList,
+      startTime: collectionRange[0].valueOf(),
+      endTime: collectionRange[1].valueOf(),
+    }).then((res) => {})
   }
 
   return (
@@ -100,7 +164,7 @@ export default () => {
           </Button>
           <Button
             type="primary"
-            onClick={addTask}
+            onClick={addTaskBtn}
             icon={<PlusCircleOutlined />}
           >
             Add
@@ -109,121 +173,119 @@ export default () => {
             open={open}
             title={drawerTitle}
             width={500}
+            closable={false}
             extra={
               <Space>
-                <Button onClick={() => setOpen(false)}>Cancel</Button>
-                <Button type="primary" onClick={() => setOpen(false)}>
+                <Button onClick={cancle}>Cancel</Button>
+                <Button type="primary" onClick={submit}>
                   Submit
                 </Button>
               </Space>
             }
           >
-            <div className="flex flex-col gap-4">
-              <Form
-                layout="vertical"
-                className="px-4"
-                form={form}
-                initialValues={{ sources: [] }}
-              >
-                <Form.Item
-                  label="Task Name"
-                  name="taskName"
-                  rules={[{ required: true }]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  label="Task Type"
-                  name="taskType"
-                  rules={[{ required: true }]}
-                >
-                  <Select
-                    options={[
-                      { label: "Keywords", value: 1 },
-                      { label: "Account", value: 2 },
-                    ]}
-                  />
-                </Form.Item>
-                <Form.Item label="Sources" required>
-                  <div className="flex gap-4 flex-wrap items-center">
-                    <Checkbox
-                      indeterminate={isIndeterminate}
-                      onChange={(e) => handleCheckAll(e.target.checked)}
-                      checked={isCheckAll}
-                    >
-                      Check all
-                    </Checkbox>
-                    <Checkbox.Group
-                      options={SOURCE_OPTIONS}
-                      name="sources"
-                      onChange={handleCheckboxChange}
-                      value={checkedList}
+            <Spin spinning={false}>
+              <div className="flex flex-col gap-4">
+                <Form layout="vertical" className="px-4" form={form}>
+                  <Form.Item
+                    label="Task Name"
+                    name="taskName"
+                    rules={[{ required: true }]}
+                  >
+                    <Input />
+                  </Form.Item>
+                  <Form.Item
+                    label="Task Type"
+                    name="taskType"
+                    rules={[{ required: true }]}
+                  >
+                    <Select
+                      options={[
+                        { label: "Keywords", value: 1 },
+                        { label: "Account", value: 2 },
+                      ]}
                     />
-                  </div>
-                </Form.Item>
-                <Form.Item label="Time Range" name="collectionRange" required>
-                  <RangePicker className="w-full" />
-                </Form.Item>
-                <Form.List
-                  name="keywords"
-                  rules={[
-                    {
-                      validator: async (_, names) => {
-                        if (!names || names.length < 1) {
-                          return Promise.reject(
-                            new Error("At least 1 keyword is required."),
-                          )
-                        }
+                  </Form.Item>
+                  <Form.Item label="Sources" required>
+                    <div className="flex gap-2 flex-wrap items-center">
+                      <Checkbox
+                        indeterminate={isIndeterminate}
+                        onChange={(e) => handleCheckAll(e.target.checked)}
+                        checked={isCheckAll}
+                      >
+                        All
+                      </Checkbox>
+                      <Checkbox.Group
+                        options={SOURCE_OPTIONS}
+                        name="sources"
+                        onChange={handleCheckboxChange}
+                        value={checkedList}
+                      />
+                    </div>
+                  </Form.Item>
+                  <Form.Item label="Time Range" name="collectionRange" required>
+                    <RangePicker className="w-full" />
+                  </Form.Item>
+                  <Form.List
+                    name="keywords"
+                    rules={[
+                      {
+                        validator: async (_, names) => {
+                          if (!names || names.length < 1) {
+                            return Promise.reject(
+                              new Error("At least 1 keyword is required."),
+                            )
+                          }
+                        },
                       },
-                    },
-                  ]}
-                >
-                  {(fields, { add, remove }, { errors }) => (
-                    <>
-                      {fields.map((field, index) => (
-                        <Form.Item
-                          label={index === 0 ? "Keywords" : ""}
-                          required={true}
-                          key={field.key}
-                        >
+                    ]}
+                  >
+                    {(fields, { add, remove }, { errors }) => (
+                      <>
+                        {fields.map((field, index) => (
                           <Form.Item
-                            {...field}
-                            validateTrigger={["onChange", "onBlur"]}
-                            rules={[
-                              {
-                                required: true,
-                                whitespace: true,
-                                message: "Please input keyword text",
-                              },
-                            ]}
-                            noStyle
+                            label={index === 0 ? "Keywords" : ""}
+                            required={true}
+                            key={field.key}
                           >
-                            <Input style={{ width: "90%" }} />
+                            <Form.Item
+                              {...field}
+                              validateTrigger={["onChange", "onBlur"]}
+                              rules={[
+                                {
+                                  required: true,
+                                  whitespace: true,
+                                  message: "Please input keyword text",
+                                },
+                              ]}
+                              noStyle
+                            >
+                              <Input style={{ width: "90%" }} />
+                            </Form.Item>
+                            {fields.length >= 1 ? (
+                              <MinusCircleOutlined
+                                className="dynamic-delete-button pl-2"
+                                onClick={() => remove(field.name)}
+                              />
+                            ) : null}
                           </Form.Item>
-                          {fields.length >= 1 ? (
-                            <MinusCircleOutlined
-                              className="dynamic-delete-button pl-2"
-                              onClick={() => remove(field.name)}
-                            />
-                          ) : null}
+                        ))}
+                        <Form.Item>
+                          <Button
+                            className="w-full"
+                            type="dashed"
+                            onClick={() => add()}
+                            icon={<PlusOutlined />}
+                          >
+                            Add Keyword
+                          </Button>
+                          <Form.ErrorList errors={errors} />
                         </Form.Item>
-                      ))}
-                      <Form.Item>
-                        <Button
-                          className="w-full"
-                          type="dashed"
-                          onClick={() => add()}
-                          icon={<PlusOutlined />}
-                        >
-                          Add Keyword
-                        </Button>
-                        <Form.ErrorList errors={errors} />
-                      </Form.Item>
-                    </>
-                  )}
-                </Form.List>
-              </Form>
-            </div>
+                      </>
+                    )}
+                  </Form.List>
+                </Form>
+              </div>
+            </Spin>
           </Drawer>
         </div>
       </div>
