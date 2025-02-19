@@ -1,16 +1,16 @@
 import { addTask, Collection, tasks } from "@/api/collection"
-import FacebookIcon from "@/components/icons/facebook"
-import InstagramIcon from "@/components/icons/instagram"
-import TiktokIcon from "@/components/icons/tiktok"
-import TwitterIcon from "@/components/icons/twitter"
-import YoutubeIcon from "@/components/icons/youtube"
 import CollectionTable from "@/components/table/CollectionTable"
 import {
   DeleteFilled,
+  FacebookOutlined,
+  InstagramOutlined,
   MinusCircleOutlined,
   PlusCircleOutlined,
   PlusOutlined,
   SignalFilled,
+  TikTokOutlined,
+  XOutlined,
+  YoutubeOutlined,
 } from "@ant-design/icons"
 import {
   Button,
@@ -23,7 +23,7 @@ import {
   Select,
   Space,
   Spin,
-  Tooltip,
+  Tag,
 } from "antd"
 import { useEffect, useState } from "react"
 
@@ -45,45 +45,45 @@ export default () => {
       title: "Facebook",
       value: 6,
       label: (
-        <Tooltip placement="top" title="Facebook">
-          <FacebookIcon />
-        </Tooltip>
+        <Tag icon={<FacebookOutlined />} color="#3b5999" className="w-[90px]">
+          Facebook
+        </Tag>
       ),
     },
     {
       title: "X (Twitter)",
       value: 3,
       label: (
-        <Tooltip placement="top" title="X (Twitter)">
-          <TwitterIcon />
-        </Tooltip>
-      ),
-    },
-    {
-      title: "Tiktok",
-      value: 29,
-      label: (
-        <Tooltip placement="top" title="Tiktok">
-          <TiktokIcon />
-        </Tooltip>
+        <Tag icon={<XOutlined />} color="#2792eb" className="w-[90px]">
+          X (Twitter)
+        </Tag>
       ),
     },
     {
       title: "Instagram",
       value: 8,
       label: (
-        <Tooltip placement="top" title="Instagram">
-          <InstagramIcon />
-        </Tooltip>
+        <Tag icon={<InstagramOutlined />} color="#c81cbb" className="w-[90px]">
+          Instagram
+        </Tag>
+      ),
+    },
+    {
+      title: "Tiktok",
+      value: 29,
+      label: (
+        <Tag icon={<TikTokOutlined />} color="#000000" className="w-[90px]">
+          Tiktok
+        </Tag>
       ),
     },
     {
       title: "Youtube",
       value: 9,
       label: (
-        <Tooltip placement="top" title="Youtube">
-          <YoutubeIcon />
-        </Tooltip>
+        <Tag icon={<YoutubeOutlined />} color="#f91417" className="w-[90px]">
+          Youtube
+        </Tag>
       ),
     },
   ]
@@ -91,6 +91,7 @@ export default () => {
   const [isIndeterminate, setIsIndeterminate] = useState(false)
   const [checkedList, setCheckedList] = useState<number[]>([])
   const [tableData, setTableData] = useState<Collection.TaskResult[]>([])
+  const [addUpdateLoading, setAddUpdateLoading] = useState(false)
 
   const handleCheckAll = (checked: boolean) => {
     const values = checked ? SOURCE_OPTIONS.map((o) => o.value) : []
@@ -125,13 +126,12 @@ export default () => {
   // 取消
   const cancle = () => {
     form.resetFields()
+    setCheckedList([])
     setOpen(false)
   }
 
   // 提交
   const submit = () => {
-    console.log(form.getFieldsValue())
-    console.log(checkedList)
     const { taskName, taskType, keywords, collectionRange } =
       form.getFieldsValue()
     addTask({
@@ -184,7 +184,7 @@ export default () => {
           <Drawer
             open={open}
             title={drawerTitle}
-            width={500}
+            width={550}
             closable={false}
             extra={
               <Space>
@@ -195,7 +195,7 @@ export default () => {
               </Space>
             }
           >
-            <Spin spinning={false}>
+            <Spin spinning={addUpdateLoading}>
               <div className="flex flex-col gap-4">
                 <Form layout="vertical" className="px-4" form={form}>
                   <Form.Item

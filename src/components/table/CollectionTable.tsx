@@ -1,12 +1,14 @@
 import { Collection } from "@/api/collection"
+import {
+  FacebookOutlined,
+  InstagramOutlined,
+  TikTokOutlined,
+  TwitterOutlined,
+  YoutubeOutlined,
+} from "@ant-design/icons"
 import type { TableProps } from "antd"
 import { Button, Space, Table, Tag } from "antd"
 import React, { useState } from "react"
-import FacebookIcon from "../icons/facebook"
-import InstagramIcon from "../icons/instagram"
-import TiktokIcon from "../icons/tiktok"
-import TwitterIcon from "../icons/twitter"
-import YoutubeIcon from "../icons/youtube"
 import "./table.css"
 
 type ColumnsType<T extends object> = TableProps<T>["columns"]
@@ -39,19 +41,49 @@ const columns: ColumnsType<Collection.TaskResult> = [
     key: "sources",
     width: 200,
     render: (_, record) => (
-      <Space size="middle">
+      <Space size="small">
         {record.sources.map((source) => {
           switch (source) {
             case 6:
-              return <FacebookIcon />
+              return (
+                <Tag
+                  icon={<FacebookOutlined />}
+                  color="#3b5999"
+                  className="flex items-center w-[20px] h-[20px] justify-center"
+                />
+              )
             case 3:
-              return <TwitterIcon />
+              return (
+                <Tag
+                  icon={<TwitterOutlined />}
+                  color="#2792eb"
+                  className="flex items-center w-[20px] h-[20px] justify-center"
+                />
+              )
             case 29:
-              return <TiktokIcon />
+              return (
+                <Tag
+                  icon={<TikTokOutlined />}
+                  color="#000000"
+                  className="flex items-center w-[20px] h-[20px] justify-center"
+                />
+              )
             case 8:
-              return <InstagramIcon />
+              return (
+                <Tag
+                  icon={<InstagramOutlined />}
+                  color="#c81cbb"
+                  className="flex items-center w-[20px] h-[20px] justify-center"
+                />
+              )
             case 9:
-              return <YoutubeIcon />
+              return (
+                <Tag
+                  icon={<YoutubeOutlined />}
+                  color="#f91417"
+                  className="flex items-center w-[20px] h-[20px] justify-center"
+                />
+              )
             default:
               return ""
           }
@@ -103,9 +135,6 @@ const columns: ColumnsType<Collection.TaskResult> = [
     width: 200,
     render: (_, record) => (
       <Space size="middle">
-        <Button color="magenta" variant="outlined" size="small">
-          Details
-        </Button>
         <Button color="blue" variant="outlined" size="small">
           Edit
         </Button>
@@ -141,9 +170,11 @@ const CollectionTable: React.FC<CollectionTableProps> = ({
       <Table<Collection.TaskResult>
         columns={columns}
         dataSource={data}
+        bordered
         scroll={{ x: "max-content" }}
         className={`collection-table w-full min-w-full`}
         rowSelection={rowSelection}
+        pagination={{ position: ["none"] }}
       />
     </div>
   )
