@@ -1,7 +1,12 @@
 import { Collection } from "@/api/collection"
 import type { TableProps } from "antd"
-import { Button, Space, Table } from "antd"
+import { Button, Space, Table, Tag } from "antd"
 import React, { useState } from "react"
+import FacebookIcon from "../icons/facebook"
+import InstagramIcon from "../icons/instagram"
+import TiktokIcon from "../icons/tiktok"
+import TwitterIcon from "../icons/twitter"
+import YoutubeIcon from "../icons/youtube"
 import "./table.css"
 
 type ColumnsType<T extends object> = TableProps<T>["columns"]
@@ -9,6 +14,7 @@ type TableRowSelection<T extends object = object> =
   TableProps<T>["rowSelection"]
 
 interface CollectionTableProps {
+  data: Collection.TaskResult[]
   onSelectionChange: (value: boolean) => void
 }
 
@@ -32,6 +38,26 @@ const columns: ColumnsType<Collection.TaskResult> = [
     dataIndex: "sources",
     key: "sources",
     width: 200,
+    render: (_, record) => (
+      <Space size="middle">
+        {record.sources.map((source) => {
+          switch (source) {
+            case 6:
+              return <FacebookIcon />
+            case 3:
+              return <TwitterIcon />
+            case 29:
+              return <TiktokIcon />
+            case 8:
+              return <InstagramIcon />
+            case 9:
+              return <YoutubeIcon />
+            default:
+              return ""
+          }
+        })}
+      </Space>
+    ),
   },
   {
     title: "Start Time",
@@ -50,6 +76,19 @@ const columns: ColumnsType<Collection.TaskResult> = [
     dataIndex: "status",
     key: "status",
     width: 200,
+    render: (_, record) => (
+      <>
+        {record.status === "ONLINE" && (
+          <Tag color="success">{record.status}</Tag>
+        )}
+        {record.status === "ALMOST" && (
+          <Tag color="warning">{record.status}</Tag>
+        )}
+        {record.status === "OFFLINE" && (
+          <Tag color="default">{record.status}</Tag>
+        )}
+      </>
+    ),
   },
   {
     title: "Frequency",
@@ -82,10 +121,10 @@ const columns: ColumnsType<Collection.TaskResult> = [
 ]
 
 const CollectionTable: React.FC<CollectionTableProps> = ({
+  data,
   onSelectionChange,
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-  const [data, setData] = useState<Collection.TaskResult[]>([])
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys)

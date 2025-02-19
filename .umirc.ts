@@ -10,7 +10,12 @@ export default defineConfig({
     { path: "/analysis", component: "analysis" },
   ],
 
-  proxy: {},
+  proxy: {
+    "/api": {
+      target: "http://localhost:12345",
+      changeOrigin: true,
+    },
+  },
   npmClient: "pnpm",
   tailwindcss: {},
   plugins: ["@umijs/plugins/dist/tailwindcss", "@umijs/plugins/dist/dva"],

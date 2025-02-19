@@ -38,7 +38,7 @@ class RequestClient {
 
   public post<T>(
     url: string,
-    data?: T,
+    data?: any,
     config?: AxiosRequestConfig,
   ): Promise<T> {
     return this.request(url, { ...config, data, method: "POST" })
@@ -54,7 +54,7 @@ class RequestClient {
 
   public put<T>(
     url: string,
-    data?: T,
+    data?: any,
     config?: AxiosRequestConfig,
   ): Promise<T> {
     return this.request(url, { ...config, data, method: "PUT" })

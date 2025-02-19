@@ -1,4 +1,4 @@
-import { addTask } from "@/api/collection"
+import { addTask, Collection, tasks } from "@/api/collection"
 import FacebookIcon from "@/components/icons/facebook"
 import InstagramIcon from "@/components/icons/instagram"
 import TiktokIcon from "@/components/icons/tiktok"
@@ -25,7 +25,7 @@ import {
   Spin,
   Tooltip,
 } from "antd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const { RangePicker } = DatePicker
 
@@ -43,7 +43,7 @@ export default () => {
   const SOURCE_OPTIONS = [
     {
       title: "Facebook",
-      value: 1,
+      value: 6,
       label: (
         <Tooltip placement="top" title="Facebook">
           <FacebookIcon />
@@ -52,7 +52,7 @@ export default () => {
     },
     {
       title: "X (Twitter)",
-      value: 2,
+      value: 3,
       label: (
         <Tooltip placement="top" title="X (Twitter)">
           <TwitterIcon />
@@ -61,7 +61,7 @@ export default () => {
     },
     {
       title: "Tiktok",
-      value: 3,
+      value: 29,
       label: (
         <Tooltip placement="top" title="Tiktok">
           <TiktokIcon />
@@ -70,7 +70,7 @@ export default () => {
     },
     {
       title: "Instagram",
-      value: 4,
+      value: 8,
       label: (
         <Tooltip placement="top" title="Instagram">
           <InstagramIcon />
@@ -79,7 +79,7 @@ export default () => {
     },
     {
       title: "Youtube",
-      value: 5,
+      value: 9,
       label: (
         <Tooltip placement="top" title="Youtube">
           <YoutubeIcon />
@@ -90,6 +90,8 @@ export default () => {
   const [isCheckAll, setIsCheckAll] = useState(false)
   const [isIndeterminate, setIsIndeterminate] = useState(false)
   const [checkedList, setCheckedList] = useState<number[]>([])
+  const [tableData, setTableData] = useState<Collection.TaskResult[]>([])
+
   const handleCheckAll = (checked: boolean) => {
     const values = checked ? SOURCE_OPTIONS.map((o) => o.value) : []
     form.setFieldsValue({ sources: values })
@@ -130,9 +132,10 @@ export default () => {
   const submit = () => {
     console.log(form.getFieldsValue())
     console.log(checkedList)
-    const { name, taskType, keywords, collectionRange } = form.getFieldsValue()
+    const { taskName, taskType, keywords, collectionRange } =
+      form.getFieldsValue()
     addTask({
-      taskName: name,
+      taskName: taskName,
       taskType: taskType,
       keywords: keywords,
       sources: checkedList,
@@ -140,6 +143,15 @@ export default () => {
       endTime: collectionRange[1].valueOf(),
     }).then((res) => {})
   }
+
+  useEffect(() => {
+    tasks({
+      current: 1,
+      size: 10,
+    }).then((res) => {
+      setTableData(res.records)
+    })
+  }, [])
 
   return (
     <div className="flex flex-col w-full gap-4">
@@ -291,7 +303,7 @@ export default () => {
       </div>
       {/* 查询结果 */}
       <div className="flex justify-center flex-col gap-4">
-        <CollectionTable onSelectionChange={setSelected} />
+        <CollectionTable onSelectionChange={setSelected} data={tableData} />
         <div className="flex justify-end">
           <Pagination total={85} defaultPageSize={20} defaultCurrent={1} />
         </div>

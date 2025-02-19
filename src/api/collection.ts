@@ -5,6 +5,8 @@ export namespace Collection {
     name?: string
     taskType?: string
     status?: string
+    current: number
+    size: number
   }
 
   export interface TaskResult {
@@ -15,13 +17,16 @@ export namespace Collection {
     keywords: string[]
     startTime: number
     endTime: number
-    status?: number
+    status?: string
     frequency?: string
   }
 }
 
-export async function tasks(data: any) {
-  return httpClient.post("", data)
+export async function tasks(data: Collection.TaskParams) {
+  return httpClient.post<{ records: Collection.TaskResult[] }>(
+    "collection",
+    data,
+  )
 }
 
 export async function addTask(data: Collection.TaskResult) {
