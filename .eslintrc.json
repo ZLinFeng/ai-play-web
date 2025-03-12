@@ -52,7 +52,7 @@
         "argsIgnorePattern": "^_.*?$"
       }
     ],
-    "import/order": [
+    /* "import/order": [
       "warn",
       {
         "groups": [
@@ -74,7 +74,7 @@
         ],
         "newlines-between": "always"
       }
-    ],
+    ], */
     "react/self-closing-comp": "warn",
     "react/jsx-sort-props": [
       "warn",
