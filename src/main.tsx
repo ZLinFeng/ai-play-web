@@ -6,6 +6,7 @@ import "@/styles/globals.css";
 import "./i18n";
 
 import App from "./App";
+import ContextWrapper from "./contexts";
 //import ContextWrapper from "./contexts";
 
 // 负责管理所有查询的状态、缓存和配置
@@ -30,9 +31,11 @@ createRoot(document.getElementById("root")!).render(
      */}
     <QueryClientProvider client={queryClient}>
       {/** 跨组件共享数据 */}
-      {/* <ContextWrapper> */}
-      <App />
-      {/* </ContextWrapper> */}
+      <ContextWrapper>
+        <main>
+          <App />
+        </main>
+      </ContextWrapper>
     </QueryClientProvider>
   </React.StrictMode>
 );
