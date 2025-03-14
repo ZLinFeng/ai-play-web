@@ -8,14 +8,14 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = (props) => {
   return (
-    <>
-      <Link href={props.to}>
-        <div className="flex gap-1 items-center">
+    <div>
+      <Link isBlock color="foreground" href={props.to}>
+        <div className="flex gap-2 items-center text-xl">
           {props.icon}
           <span>{props.label}</span>
         </div>
       </Link>
-    </>
+    </div>
   );
 };
 
