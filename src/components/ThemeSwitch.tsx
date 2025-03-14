@@ -53,11 +53,11 @@ const ThemeSwitch: React.FC = () => {
 
   return (
     <Switch
-      size="sm"
-      onChange={handleChange}
       checked={theme === "light"}
       endContent={<MoonIcon />}
+      size="md"
       startContent={<SunIcon />}
+      onChange={handleChange}
     />
   );
 };

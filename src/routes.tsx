@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
-import Home from "@/pages/Home";
-import Models from "@/pages/Models";
+import CorpusPage from "./pages/data/CorpusPage";
 
 const privateRoutes = [
   {
@@ -9,12 +8,8 @@ const privateRoutes = [
     element: <MainLayout />,
     children: [
       {
-        path: "",
-        element: <Home />,
-      },
-      {
-        path: "/models",
-        element: <Models />,
+        path: "/data/corpus",
+        element: <CorpusPage />,
       },
     ],
   },
